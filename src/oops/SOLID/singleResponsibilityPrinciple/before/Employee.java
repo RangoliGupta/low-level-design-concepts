@@ -62,10 +62,8 @@ public abstract class Employee {
     public String getFullName(){
         return this.firstName + " " + this.lastName;
     }
-
-    public  void save(){
-        try {
-        	Employee employee =this;
+    publc StringBuilder serialize(){
+        Employee employee =this;
             StringBuilder sb = new StringBuilder();
             sb.append("### EMPLOYEE RECORD ####");
             sb.append(System.lineSeparator());
@@ -81,7 +79,11 @@ public abstract class Employee {
             sb.append("MONTHLY WAGE: ");
             sb.append(employee.monthlyIncome);
             sb.append(System.lineSeparator());
-
+        return sb;
+    }
+    public  void save(){
+        try {
+        	StringBuilder sb = serialize();
             Path path = Paths.get(employee.getFullName()
                     .replace(" ","_") + ".rec");
             Files.write(path, sb.toString().getBytes());
